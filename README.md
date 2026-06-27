@@ -46,7 +46,7 @@ Modern VLMs are strong at global scene understanding. They can describe images, 
 - **Multi-object reasoning:** how many targets exist and which regions should be returned.
 - **Open-vocabulary rejection:** when no region matches the query, the model should say so instead of hallucinating a box.
 
-Many VLMs handle localization by generating coordinates such as `[x1, y1, x2, y2]`. This format is brittle for language models. Coordinates are long numeric sequences, multiple objects multiply the output length, and small formatting or ordering errors can make the result invalid or inaccurate.
+Many VLMs handle localization by generating coordinates such as `[x1, y1, x2, y2]`. This format is brittle for language models. Coordinates are long numeric sequences, multiple objects multiply the output length, and small formatting or ordering errors can make the result invalid or inaccurate. Meanwhile, traditional coordinate generation requires more output tokens, lengthens the decoding path, and lowers inference efficiency.
 
 VLX-Seek changes the task from:
 
@@ -73,8 +73,8 @@ Embodied and edge-side visual systems need stable spatial anchors. Monitoring ca
 - where the object is
 - which instance the instruction refers to
 - whether the target is still present
-- how the target relates to nearby objects
 - whether the requested object is absent
+- whether the target can be found quickly and efficiently
 
 For these devices, fine-grained grounding is not just an offline benchmark. A monitoring camera may need to locate a person entering a restricted area, a drone may need to find a small target from an aerial view, a robot may need to grasp or avoid a specific object, and a robot dog may need to follow, inspect, or navigate around a referenced target under limited compute and power budgets.
 
