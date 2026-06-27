@@ -33,14 +33,16 @@
     <img src="assets/vll_seek_zh_cover.jpg" width="88%" alt="点击观看演示视频">
   </a>
 </p>
+<p align="center">☝️ 点击上方封面图观看演示视频</p>
 
-<p align="center">
-  <img src="assets/vlx_seek_model_flow_realistic_visual_sources.png" alt="VLX-Seek 总览图：视觉来源、候选区域、区域 token 与 grounded output" width="88%">
-</p>
 
 VLX-Seek 是一个面向端侧具身视觉的细粒度感知视觉语言模型。它关注的不是让模型只回答“画面里有什么”，而是让模型进一步知道目标在哪里、是哪一个实例、是否符合用户描述，以及目标不存在时是否应该拒识。
 
 不同于让语言模型直接生成边界框坐标，VLX-Seek 将定位任务改写为区域检索与区域引用问题。候选区域会被编码成可寻址的区域 token，语言模型通过选择、比较和引用这些区域来完成 grounded 输出。
+
+<p align="center">
+  <img src="assets/vlx_seek_model_flow_realistic_visual_sources.png" alt="VLX-Seek 总览图：视觉来源、候选区域、区域 token 与 grounded output" width="88%">
+</p>
 
 ## 项目概览
 

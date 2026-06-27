@@ -28,28 +28,19 @@
 <p align="center"><sub>Overview video: VLX-Seek for edge multimodal fine-grained perception</sub></p>
 
 <p align="center">
-  <video
-    controls
-    muted
-    playsinline
-    preload="metadata"
-    width="88%"
-    poster="assets/vlx_seek_en_cover.jpg"
-  >
-    <source src="https://airesources.oss-cn-hangzhou.aliyuncs.com/Demo/VLX-Seek/vlx_seek_en.mp4" type="video/mp4">
-    Your browser does not support video playback. Please
-    <a href="https://airesources.oss-cn-hangzhou.aliyuncs.com/Demo/VLX-Seek/vlx_seek_en.mp4">watch the video</a>.
-  </video>
+  <a href="https://airesources.oss-cn-hangzhou.aliyuncs.com/Demo/VLX-Seek/vlx_seek_en.mp4">
+    <img src="assets/vlx_seek_en_cover.jpg" width="88%" alt="Click to watch the demo video">
+  </a>
 </p>
-
-
-<p align="center">
-  <img src="assets/vlx_seek_model_flow_realistic_visual_sources.png" alt="VLX-Seek overview: visual sources, region proposals, region tokens, and grounded output" width="88%">
-</p>
+<p align="center">☝️ Click the cover image above to watch the demo video.</p>
 
 VLX-Seek is a fine-grained perception vision-language model for edge-side embodied vision. It is designed for scenarios where a model must not only understand what is in an image, but also identify where the relevant objects are, which instance is being referred to, and when a target does not exist.
 
 Instead of asking the language model to directly generate bounding-box coordinates, VLX-Seek reformulates localization as region retrieval and region reference. Candidate regions are encoded as addressable region tokens, and the language model answers by selecting, comparing, and referring to those regions.
+
+<p align="center">
+  <img src="assets/vlx_seek_model_flow_realistic_visual_sources.png" alt="VLX-Seek overview: visual sources, region proposals, region tokens, and grounded output" width="88%">
+</p>
 
 ## Overview
 
