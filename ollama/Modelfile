@@ -1,0 +1,47 @@
+# VLX-Seek 3B — Ollama Modelfile (seanlab007 适配版)
+# ─────────────────────────────────────────────────────────────────────────────
+# VLX-Seek 是 om-ai-lab 发布的细粒度视觉定位 VLM (CVPR 2026)
+# 范式: Region Reference (区域引用 token) 而非坐标生成
+# 原仓: https://github.com/om-ai-lab/VLX-Seek
+# Fork: https://github.com/seanlab007/VLX-Seek
+# 协议: Apache 2.0
+#
+# 用途: 在 ollama 中以 OpenAI 兼容 API 调用 vlx-seek-3b
+#       asi-genesis / maoai 通过 http://localhost:11434/v1/chat/completions
+#       即可像调用 llama3 / qwen2.5 一样调用 VLX-Seek
+#
+# 部署步骤 (权重发布后执行):
+#   1. 等待 https://huggingface.co/omlab 发布 vlx-seek-3b gguf
+#   2. 下载到 ~/models/vlx-seek-3b/
+#   3. cd ~/models/vlx-seek-3b/
+#   4. ollama create vlx-seek-3b -f /Users/daiyan/Desktop/VLX-Seek/ollama/Modelfile
+#   5. ollama run vlx-seek-3b "describe the image"
+#
+# 当前状态: 模型权重未发布 (2026-06-28), 此 Modelfile 处于 ready-to-load 状态
+
+FROM /Users/daiyan/models/vlx-seek-3b/vlx-seek-3b-q4_k_m.gguf
+
+# ── 元数据 ──
+PARAMETER temperature 0.2
+PARAMETER top_p 0.9
+PARAMETER top_k 40
+PARAMETER num_ctx 4096
+PARAMETER num_predict 1024
+PARAMETER stop "<|im_end|>"
+PARAMETER stop "<|endoftext|>"
+
+# ── 视觉定位专用 system prompt ──
+#   范式: 输出 <ground>区域描述</ground><object><obj_n></object> token
+#   asi-genesis/maoai 客户端解析这个 token 流, 映射回 bbox 坐标
+SYSTEM """You are VLX-Seek, a fine-grained perception vision-language model.
+When given an image and a referring expression, identify target regions using
+the region-reference token format:
+
+  <ground>description of the target region</ground><object><obj_id></object>
+
+Rules:
+1. NEVER output raw coordinate numbers. Use region-reference tokens only.
+2. When multiple regions match, list them in reading order (top-left first).
+3. If asked to count, output the integer count plus the region tokens.
+4. For OCR tasks, embed the recognized text in the ground tag.
+5. Be concise. No preamble, no explanation, only structured output."""
